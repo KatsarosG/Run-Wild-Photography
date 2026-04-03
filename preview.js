@@ -10,7 +10,7 @@ let currentIndex = 0;
 function openLightbox(index) {
     currentIndex = index;
     lightbox.style.display = "flex";
-    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.src = images[currentIndex].dataset.full;
 }
 
 function closeLightbox() {
@@ -20,25 +20,23 @@ function closeLightbox() {
 
 function showPrev() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
-    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.src = images[currentIndex].dataset.full;
 }
 
 function showNext() {
     currentIndex = (currentIndex + 1) % images.length;
-    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.src = images[currentIndex].dataset.full;
 }
 
-// Open lightbox
 images.forEach((img, index) => {
     img.addEventListener("click", () => openLightbox(index));
 });
 
-// Close
 closeBtn.addEventListener("click", closeLightbox);
+
 lightbox.addEventListener("click", e => {
     if (e.target === lightbox) closeLightbox();
 });
 
-// Navigation
 prevBtn.addEventListener("click", showPrev);
 nextBtn.addEventListener("click", showNext);
